@@ -2,15 +2,17 @@
         <v-tooltip  
             right 
             :disabled="!show_tooltip"
+            :color="secondary_color"
         >
             <v-btn slot="activator" @click.stop="click" class="tb-actual-btn" small icon>
-                <v-icon :color="element.color" small>{{ display_icon }}</v-icon>
+                <v-icon :color="element.color || text_color" small>{{ display_icon }}</v-icon>
             </v-btn>
-            <span>{{ display_name }}</span>
+            <span :style="`color: ${text_color};`">{{ display_name }}</span>
         </v-tooltip>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
     name: "toolbar-element",
     props: {
@@ -31,7 +33,8 @@ export default {
         },
         show_tooltip() {
             return this.element.display_name != undefined && this.element.display_text != "";
-        }
+        },
+        ...mapGetters([ "secondary_color", "text_color" ])
     }
 }
 </script>

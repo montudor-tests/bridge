@@ -1,0 +1,78 @@
+{
+    "name": "Default",
+    "description": "The default look of bridge.",
+    "variants": [
+        {
+            "name": "Dark Theme",
+            "define": {
+                "theme": {
+                    "primary": "#303030",
+                    "secondary": "#212121",
+                    "tertiary": "#424242",
+                    "accent": "success",
+                    "text": "#ffffff"
+                },
+                "highlighter": {
+                    "property": "color: #a6e22e;",
+                    "keyword": "color: #f92672;",
+                    "definition": "color: #fd971f;",
+                    "atom": "color: #ae81ff;",
+                    "number": "color: #ae81ff;",
+                    "string": "color: #e6db74;",
+                    "variable": "color: #9effff;",
+                    "variable_strong": "color: #66d9ef;",
+                    "meta": "color: white;",
+                    "comment": "color: #75715e;"
+                }
+            }
+        },
+        {
+            "name": "Light Theme",
+            "define": {
+                "theme": {
+                    "primary": "#ffffff",
+                    "secondary": "#fafafa",
+                    "tertiary": "#f7f7f7",
+                    "accent": "success",
+                    "text": "rgba(0, 0, 0, 0.87)"
+                },
+                "highlighter": {
+                    "property": "color: black;",
+                    "keyword": "color: #5A5CAD;",
+                    "definition": "text-decoration: underline;",
+                    "atom": "color: #6C8CD5;",
+                    "number": "color: #164;",
+                    "string": "color: red;",
+                    "variable": "color: black;",
+                    "variable_strong": "color: black;",
+                    "meta": "color: yellow;",
+                    "comment": "color: #0080FF;"
+                }
+            }
+        },
+        {
+            "name": "Red Theme",
+            "define": {
+                "theme": {
+                    "primary": "#EF5350",
+                    "secondary": "#B71C1C",
+                    "tertiary": "#D32F2F",
+                    "accent": "warning",
+                    "text": "#ffffff"
+                },
+                "highlighter": {
+                    "property": "color: black;",
+                    "keyword": "color: #5A5CAD;",
+                    "definition": "text-decoration: underline;",
+                    "atom": "color: #6C8CD5;",
+                    "number": "color: #164;",
+                    "string": "color: red;",
+                    "variable": "color: black;",
+                    "variable_strong": "color: black;",
+                    "meta": "color: yellow;",
+                    "comment": "color: #0080FF;"
+                }
+            }
+        }
+    ]
+}

@@ -11,8 +11,8 @@
                 v-if="has_toolbar" 
                 ref="drag_region" 
                 height="30px"
-                :color="win.options ? win.options.toolbar_color : undefined"
-                style="overflow-x: auto; overflow-y: hidden;"
+                :color="win.options && win.options.toolbar_color ? win.options.toolbar_color : secondary_color"
+                :style="`overflow-x: auto; overflow-y: hidden; color: ${text_color};`"
             >
                 <span class="window-title">{{ window_title }}</span>
                 <v-spacer></v-spacer>
@@ -47,6 +47,8 @@
                 max-height: ${maxHeight}px;
                 height: ${is_fullscreen ? maxHeight : height}px;
                 padding-left: ${has_sidebar ? 0 : 8}px;
+                color: ${text_color};
+                background: ${primary_color};
             `">
                 <v-list
                     class="sidebar"
@@ -58,6 +60,7 @@
                         height: ${(is_fullscreen ? maxHeight : height) - 20}px;
                         overflow-y: auto;
                         overflow-x: hidden;
+                        background: ${primary_color};
                     `"
                 >
                     <sidebar-element
@@ -85,8 +88,11 @@
                     :content="win.content"
                 />
             </v-card-text>
-            <v-divider v-if="win.actions != undefined"/>
-            <v-card-actions v-if="win.actions != undefined">
+            <v-divider v-if="win.actions != undefined" :color="secondary_color"/>
+            <v-card-actions
+                v-if="win.actions != undefined"
+                :style="`color: ${text_color}; background: ${primary_color};`"
+            >
                 <window-content 
                     v-for="(content, i) in win.actions" 
                     :key="content.key || `plugin-popup-window-actions-${Math.random()}-${i}`"
@@ -102,6 +108,7 @@
 import WindowContent from "./WindowContent.vue";
 import ToolbarElement from "./ToolbarElement.vue";
 import SidebarElement from "./SidebarElement.vue";
+import { mapGetters } from "vuex"
 
 export default {
     name: "window",
@@ -180,7 +187,8 @@ export default {
         //Sidebar
         has_sidebar() {
             return this.win.sidebar != undefined;
-        }
+        },
+        ...mapGetters([ "primary_color", "secondary_color", "text_color" ])
     },
     watch: {
         is_window_visible(new_val) {

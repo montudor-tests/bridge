@@ -4,7 +4,7 @@
         v-if="content.type == 'text' || content.type == undefined"
         :class="`${pre_color} ${content.action != undefined ? 'click-action' : ''}`"
         @click.stop="action.default"
-        style="overflow-x: auto;"
+        :style="`overflow-x: auto; color: ${text_color};`"
     >{{ content.text }}</pre>
     <v-subheader 
         v-else-if="content.type == 'header'"
@@ -191,6 +191,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
     name: "window-content",
     props: {
@@ -237,7 +238,8 @@ export default {
                 return `${tmp[0]}--text text--${tmp[1]}`;
             }
             return `${this.content.color}--text`;
-        }
+        },
+        ...mapGetters([ "text_color" ])
     },
     methods: {
         makeFunction(action) {

@@ -1,5 +1,11 @@
 <template>
-    <v-toolbar fixed app clipped height="24px">
+    <v-toolbar
+        :style="`background-color: ${secondary_color}; color: ${text_color};`"
+        fixed
+        app
+        clipped
+        height="24px"
+    >
         <v-toolbar-items>
             <app-menu v-for="(menu, i) in menu_details" :key="i" :menu="menu"></app-menu>
         </v-toolbar-items>
@@ -26,6 +32,7 @@
     import { remote } from "electron";
     import MouseTrap from "mousetrap";
     import KeyManager from "../scripts/appMenu/KeyManager";
+    import { mapGetters } from 'vuex';
 
     export default {
         name: "app-toolbar",
@@ -52,7 +59,11 @@
         computed: {
             menu_details() {
                 return this.$store.state.AppMenu;
-            }
+            },
+            ...mapGetters([
+                "secondary_color",
+                "text_color"
+            ])
         },
         methods: {
             closeWindow() {

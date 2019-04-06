@@ -1,3 +1,6 @@
+import ThemeManager from "../../scripts/themes/Manager";
+import Store from "../index";
+
 const state = {
     is_dark_mode: true,
     files: {
@@ -12,30 +15,8 @@ const state = {
         lang: "mdi-web"
     },
     color_theme: {
-        dark: {
-            property: "color: #a6e22e;",
-            keyword: "color: #f92672;",
-            definition: "color: #fd971f;",
-            atom: "color: #ae81ff;",
-            number: "color: #ae81ff;",
-            string: "color: #e6db74;",
-            variable: "color: #9effff;",
-            variable_strong: "color: #66d9ef;",
-            meta: "color: white;",
-            comment: "color: #75715e;"
-        },
-        light: {
-            property: "color: black;",
-            keyword: "color: #5A5CAD;",
-            definition: "text-decoration: underline;",
-            atom: "color: #6C8CD5;",
-            number: "color: #164;",
-            string: "color: red;",
-            variable: "color: black;",
-            variable_strong: "color: black;",
-            meta: "color: yellow;",
-            comment: "color: #0080FF;"
-        }
+        dark: ThemeManager.getHighlighter(0),
+        light: ThemeManager.getHighlighter(1)
     }
 }
 
@@ -48,12 +29,29 @@ const mutations = {
     }
 }
 
-const actions = {
-
+const getters = {
+    manager_color_theme() {
+        return ThemeManager.getColorTheme(Store.state.Settings.color_theme_variant);
+    },
+    primary_color(state, getters) {
+        return getters.manager_color_theme.primary;
+    },
+    secondary_color(state, getters) {
+        return getters.manager_color_theme.secondary;
+    },
+    tertiary_color(state, getters) {
+        return getters.manager_color_theme.tertiary;
+    },
+    text_color(state, getters) {
+        return getters.manager_color_theme.text;
+    },
+    accent_color(state, getters) {
+        return getters.manager_color_theme.accent;
+    }
 }
 
 export default {
     state,
     mutations,
-    actions
+    getters
 }

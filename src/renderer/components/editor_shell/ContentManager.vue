@@ -54,12 +54,6 @@
             }
         },
         computed: {
-            // open_files() {
-            //     return this.$store.getters.open_files();
-            // },
-            // selected_tab() {
-            //     return this.$store.state.TabSystem.selected_tab;
-            // },
             selected_project() {
                 return this.$store.state.Explorer.project;
             },

@@ -1,6 +1,10 @@
 <template>
     <v-container>
-        <v-toolbar flat height="30px">
+        <v-toolbar 
+            :style="`background-color: ${secondary_color}; color: ${text_color};`"
+            flat
+            height="30px"
+        >
             <v-tooltip bottom class="first">
                 <v-btn icon flat @click.stop="refresh" slot="activator" small>
                     <v-icon small>refresh</v-icon>
@@ -54,6 +58,8 @@
             :loading="loading" 
             :disabled="items.length <= 1"
             @input="getDirectory"
+            background-color="rgba(0, 0, 0, 0)"
+            :style="`color: ${text_color};`"
         ></v-select>
         <v-divider></v-divider>
         <file-displayer :files="clever_directory" :project="selected" class="file-displayer"></file-displayer>
@@ -71,6 +77,7 @@
     import { BASE_PATH } from "../../../scripts/constants";
     import ZipFolder from "zip-a-folder";
     import fs from "fs";
+    import { mapGetters } from 'vuex';
     
     export default {
         name: "content-explorer",
@@ -151,7 +158,8 @@
                     value: e 
                 }));
                 return tmp;
-            }
+            },
+            ...mapGetters([ "secondary_color", "text_color" ])
         },
         methods: {
             refresh() {

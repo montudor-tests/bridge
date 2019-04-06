@@ -1,6 +1,6 @@
 <template>
     <v-layout :style="`overflow-x: ${is_mandatory ? 'scroll' : 'auto'}`" row wrap>
-            <v-tabs slider-color="success" v-model="selected_tab" :mandatory="is_mandatory" :show-arrows="false">
+            <v-tabs :slider-color="accent_color" v-model="selected_tab" :mandatory="is_mandatory" :show-arrows="false">
                 <v-tab 
                     v-for="(file, i) in open_files"
                     :key="`${selected_project}-${i}-${unsaved.join()}`"
@@ -19,6 +19,7 @@
 <script>
 import TabSystem from "../../scripts/TabSystem";
 import EventBus from "../../scripts/EventBus";
+import { mapGetters } from 'vuex';
 
 export default {
     name: "editor-shell-tab-system",
@@ -58,7 +59,10 @@ export default {
 
         is_mandatory() {
             return this.open_files.length > 0;
-        }
+        },
+        ...mapGetters([
+            "accent_color"
+        ])
     },
     methods: {
         closeTab(i) {

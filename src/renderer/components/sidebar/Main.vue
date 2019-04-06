@@ -1,6 +1,6 @@
 <template>
-    <v-flex xs2 v-if="sidebar_menu_state != 0 && current_menu" :style="`background: ${is_dark_mode ? '#424242' : '#fff'};`" fixed>
-        <v-list>
+    <v-flex xs2 v-if="sidebar_menu_state != 0 && current_menu" :style="`background: ${tertiary_color};`" fixed>
+        <v-list :style="`background: ${tertiary_color}; color: ${text_color};`">
             <h2>{{ current_menu.title }}</h2>
             <v-divider></v-divider>
             
@@ -11,6 +11,7 @@
 
 <script>
     import SidebarContent from "./Content";
+import { mapGetters } from 'vuex';
 
     export default {
         name: "sidebar-main",
@@ -29,7 +30,11 @@
             },
             current_menu() {
                 return this.menu_items[this.sidebar_menu_state-1];
-            }
+            },
+            ...mapGetters([
+                "tertiary_color",
+                "text_color"
+            ])
         },
         data() {
             return {

@@ -1,6 +1,10 @@
 <template>
     <div>
-        <v-toolbar flat height="30px">
+        <v-toolbar
+            :style="`background-color: ${secondary_color}; color: ${text_color};`"
+            flat
+            height="30px"
+        >
             <v-tooltip bottom class="first">
                 <v-btn slot="activator" @click.stop="is_menu_open = true" class="first" small icon>
                     <v-icon small>settings</v-icon>
@@ -81,6 +85,7 @@
     import { shell } from "electron";
     import PluginEnv from "../../../scripts/plugins/PluginEnv";
     import fs from "fs";
+    import { mapGetters } from 'vuex';
 
     export default {
         name: "content-plugins",
@@ -109,7 +114,8 @@
                 get() {
                     return this.$store.state.Plugins.is_menu_open;
                 }
-            }
+            },
+            ...mapGetters([ "secondary_color", "text_color" ])
         },
         methods: {
             on_resize() {

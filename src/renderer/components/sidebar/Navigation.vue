@@ -1,6 +1,19 @@
 <template>
-    <v-navigation-drawer :style="`max-height: ${nav_height}px;`" fixed mini-variant-width="60" mini-variant stateless value="true" app>
-        <v-toolbar fixed height="24px" width="60">
+    <v-navigation-drawer
+        :style="`max-height: ${nav_height}px; background-color: ${tertiary_color};`"
+        fixed
+        mini-variant-width="60"
+        mini-variant
+        stateless
+        value="true"
+        app
+    >
+        <v-toolbar
+            :style="`background-color: ${secondary_color}; color: ${text_color};`"
+            fixed
+            height="24px"
+            width="60"
+        >
             <h4>bridge.</h4>
         </v-toolbar>
 
@@ -18,6 +31,7 @@
 
 <script>
     import SidebarElement from "../windowFactory/SidebarElement";
+import { mapGetters } from 'vuex';
 
     export default {
         name: "sidebar-navigation",
@@ -36,7 +50,12 @@
             },
             menu_items() {
                 return this.$store.getters.all_items;
-            }
+            },
+            ...mapGetters([
+                "tertiary_color",
+                "secondary_color",
+                "text_color"
+            ])
         },
         data() {
             return {

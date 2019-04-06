@@ -8,6 +8,7 @@ import AddSnippetWindow from "./AddSnippet";
 import Snippets from "./Snippets";
 import ProblemIterator from "../scripts/editor/problems/Problems";
 import { ipcRenderer } from "electron";
+import ThemeManager from "../scripts/themes/Manager";
 
 class ReactiveListEntry {
     constructor(text, parent, watch_key, index) {
@@ -58,16 +59,16 @@ class ReactiveList {
 }
 
 class ReactiveSwitch {
-    constructor(parent, watch_key, def) {
+    constructor(parent, watch_key, def, number_boolean=false) {
         this.type = "switch";
-        this.input = parent.data[watch_key];
+        this.input = number_boolean ? Boolean(parent.data[watch_key]) : parent.data[watch_key];
         for(let key in def) {
             this[key] = def[key];
         }
 
         this.action = (val) => {
             this.input = val;
-            parent.data[watch_key] = val;
+            parent.data[watch_key] = number_boolean ? Number(val) : val;
             parent.save();
         };
     }
@@ -90,9 +91,9 @@ class ReactiveInput {
 }
 
 class ReactiveDropdown {
-    constructor(parent, watch_key, options, def, cb) {
+    constructor(parent, watch_key, options, def, cb, save_index=false) {
         this.type = "select";
-        this.input = parent.data[watch_key];
+        this.input = save_index ? options[parent.data[watch_key]] : parent.data[watch_key];
         this.options = options;
         for(let key in def) {
             this[key] = def[key];
@@ -100,7 +101,7 @@ class ReactiveDropdown {
 
         this.action = (val) => {
             this.input = val;
-            parent.data[watch_key] = val;
+            parent.data[watch_key] = save_index ? options.indexOf(val) : val;
             parent.save();
             if(typeof cb == "function") cb(val);
         };
@@ -239,11 +240,30 @@ export default class SettingsWindow extends TabWindow {
                 title: "Appearance"
             },
             content: [
-                new ReactiveSwitch(this, "is_dark_mode", {
-                    color: "light-green",
-                    text: "Dark Mode",
-                    key: `settings.appearance.tab.${Math.random()}`
-                }),
+                () => {
+                    let themes = ThemeManager.getAvailableThemes();
+                    if(themes.length <= 1) {
+                        return {
+                            text: "You have less than one theme installed."
+                        };
+                    } else if(themes.length == 2) {
+                        return new ReactiveSwitch(this, "color_theme_variant", {
+                            color: "light-green",
+                            text: themes[themes.length - 1],
+                            key: `settings.appearance.tab.${Math.random()}`
+                        }, true);
+                    } else {
+                        return new ReactiveDropdown(this, "color_theme_variant", themes, {
+                            text: "Choose a theme...",
+                            key: `settings.appearance.tab.${Math.random()}`
+                        }, null, true)
+                    }
+                },
+                // new ReactiveSwitch(this, "is_dark_mode", {
+                //     color: "light-green",
+                //     text: "Dark Mode",
+                //     key: `settings.appearance.tab.${Math.random()}`
+                // }),
                 new ReactiveSwitch(this, "inversed_arrows", {
                     color: "light-green",
                     text: "Inverse Arrows",

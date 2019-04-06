@@ -1,0 +1,8 @@
+{
+    "set": {},
+    "define": {
+        "keywords": [ "minecraft", "description", "events", "components", "component_groups" ],
+        "titles": [ "format_version", "event" ],
+        "symbols": [ "add", "remove", "sequence", "randomize", "scripts", "animations" ]
+    }
+}

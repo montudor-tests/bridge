@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <v-app :dark="$store.state.Appearance.is_dark_mode">
+    <v-app :style="`color: ${text_color};`">
       <sidebar-navigation></sidebar-navigation>
 
       <app-toolbar></app-toolbar>
@@ -9,7 +9,7 @@
         <v-container class="no-padding" fluid fill-height align>
           <v-layout row align-space-between all fill-height>
             <sidebar-main fill-height></sidebar-main>
-            <v-flex :xs10="is_sidebar_open" :xs12="!is_sidebar_open" style="padding-left: 0.5em;">
+            <v-flex :xs10="is_sidebar_open" :xs12="!is_sidebar_open" :style="`padding-left: 0.5em; background: ${primary_color};`">
               <editor-shell-tab-system></editor-shell-tab-system>
               <editor-shell-content-manager></editor-shell-content-manager>
 
@@ -23,7 +23,7 @@
         </v-container>
       </v-content>
 
-      <v-footer :class="footer_visible ? 'big' : ''" fixed app>
+      <v-footer :class="footer_visible ? 'big' : ''" fixed app :style="`background-color: ${secondary_color}; color: unset;`">
         <footer-main></footer-main>
         <v-spacer></v-spacer>
         <v-divider v-if="footer_visible" vertical></v-divider>
@@ -48,6 +48,7 @@
 
   import UpdateWindow from "./windows/UpdateApp";
   import SETTINGS from "./store/Settings";
+  import { mapGetters } from 'vuex';
   
   export default {
     name: 'bridge',
@@ -79,7 +80,12 @@
       },
       is_plugin_window_open() {
         return this.$store.state.Plugins.is_menu_open;
-      }
+      },
+      ...mapGetters([
+        "text_color",
+        "primary_color",
+        "secondary_color"
+      ])
     },
     watch: {
       is_plugin_window_open(to) {
@@ -146,6 +152,16 @@
   .v-content .v-content__wrap > .container {
     padding-left: 0;
     padding-top: 0;
+  }
+
+  .theme--light.v-btn,
+  .theme--light.v-icon,
+  .theme--light,
+  .theme--light.v-card,
+  .theme--light.v-label,
+  .theme--light.v-select .v-select__selections {
+    color: unset;
+    background: unset;
   }
 </style>
 

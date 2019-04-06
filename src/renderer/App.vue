@@ -154,14 +154,36 @@
     padding-top: 0;
   }
 
+  a {
+    color: unset !important;
+  }
+  table {
+    border-color: unset;
+  }
+
   .theme--light.v-btn,
   .theme--light.v-icon,
-  .theme--light,
-  .theme--light.v-card,
   .theme--light.v-label,
-  .theme--light.v-select .v-select__selections {
+  .theme--light.v-select .v-select__selections,
+  .theme--light.v-list .v-list__tile__sub-title {
     color: unset;
     background: unset;
+  }
+
+  .theme--light.v-list,
+  .theme--light.v-card,
+  .theme--light.application  {
+    color: unset;
+    background: var(--tertiary-color);
+  }
+
+  .text--primary {
+    color: var(--text-color) !important;
+  }
+
+  .text--secondary {
+    color: var(--text-color) !important;
+    opacity: 0.9;
   }
 </style>
 

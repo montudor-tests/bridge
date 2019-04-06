@@ -1,5 +1,5 @@
 <template>
-    <v-list three-line>
+    <v-list :style="`color: ${text_color} !important;`" three-line>
         <v-layout v-if="plugins == undefined" justify-center>
             <v-progress-circular
                 :size="70"
@@ -56,6 +56,7 @@
 <script>
 import fs from "fs";
 import PluginEnv from "../../scripts/plugins/PluginEnv";
+import { mapGetters } from 'vuex';
 
 export default {
     name: "plugin-list",
@@ -89,7 +90,8 @@ export default {
         },
         show_list() {
             return this.plugins_to_show.length > 0;
-        }
+        },
+        ...mapGetters([ "text_color" ])
     },
     methods: {
         loadPlugins() {

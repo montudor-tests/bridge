@@ -58,7 +58,8 @@
             :loading="loading" 
             :disabled="items.length <= 1"
             @input="getDirectory"
-            background-color="rgba(0, 0, 0, 0)"
+            :color="accent_color"
+            :background-color="tertiary_color"
             :style="`color: ${text_color};`"
         ></v-select>
         <v-divider></v-divider>
@@ -159,7 +160,7 @@
                 }));
                 return tmp;
             },
-            ...mapGetters([ "secondary_color", "text_color" ])
+            ...mapGetters([ "secondary_color", "tertiary_color", "text_color", "accent_color" ])
         },
         methods: {
             refresh() {

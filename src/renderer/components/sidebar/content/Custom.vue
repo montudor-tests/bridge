@@ -1,6 +1,11 @@
 <template>
     <div v-if="content != undefined || sidebar != undefined">
-        <v-toolbar v-if="show_toolbar" flat height="30px">
+        <v-toolbar
+            v-if="show_toolbar"
+            flat
+            height="30px"
+            :color="secondary_color"
+        >
             <toolbar-element
                 v-for="(el, i) in toolbar" 
                 :key="`plugin-toolbar-element-${i}`"
@@ -29,6 +34,7 @@
 <script>
     import ToolbarElement from "../../windowFactory/ToolbarElement";
     import WindowContent from "../../windowFactory/WindowContent";
+    import { mapGetters } from 'vuex';
 
     export default {
         name: "content-custom",
@@ -52,7 +58,8 @@
 
             show_toolbar() {
                 return this.toolbar != undefined;
-            }
+            },
+            ...mapGetters([ "secondary_color", "text_color" ])
         },
         methods: {
             on_resize(e) {

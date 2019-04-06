@@ -34,7 +34,7 @@
 
 <script>
     import { DOC_LOADER, DOC_WINDOW } from "../../scripts/documentation/main";
-import { mapGetters } from 'vuex';
+    import { mapGetters } from 'vuex';
 
     export default {
         name: "documentation-main",

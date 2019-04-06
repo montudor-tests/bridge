@@ -1,5 +1,5 @@
 <template>
-    <v-tooltip :disabled="!show_display_name" top>
+    <v-tooltip :color="secondary_color" :disabled="!show_display_name" top>
         <v-badge :class="has_click_action ? 'change-cursor' : ''" @click.stop.native="click" v-model="show_badge" slot="activator" overlap bottom left small :color="badge_color">
             <span slot="badge">
                 <v-icon small v-if="badge_type == 'icon'">{{ badge_content }}</v-icon>
@@ -8,11 +8,12 @@
             <v-icon>{{ display_icon }}</v-icon>
         </v-badge>
 
-        <span>{{ display_name }}</span>
+        <span :style="`color: ${text_color};`">{{ display_name }}</span>
     </v-tooltip>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
     name: "footer-element",
     props: {
@@ -53,7 +54,8 @@ export default {
         },
         has_click_action() {
             return typeof this.element.action == "function";
-        }
+        },
+        ...mapGetters([ "text_color", "secondary_color" ])
     }
 }
 </script>

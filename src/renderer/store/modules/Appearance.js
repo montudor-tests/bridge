@@ -31,7 +31,9 @@ const mutations = {
 
 const getters = {
     manager_color_theme() {
-        return ThemeManager.getColorTheme(Store.state.Settings.color_theme_variant);
+        let variant = Store.state.Settings.color_theme_variant;
+        ThemeManager.setColorTheme(variant);
+        return ThemeManager.getColorTheme(variant);
     },
     primary_color(state, getters) {
         return getters.manager_color_theme.primary;

@@ -26,6 +26,15 @@ class ThemeManager {
         }
     }
 
+    static setColorTheme(variant_id) {
+        try {
+            let theme = this.get(variant_id).define.theme;
+            console.log("Update", theme);
+            document.documentElement.style.setProperty("--tertiary-color", theme.tertiary);
+            document.documentElement.style.setProperty("--text-color", theme.text);
+        } catch(e) { console.error(e); }
+    }
+
     static getAvailableThemes() {
         return this.current_theme_group.variants.map(v => v.name);
     }

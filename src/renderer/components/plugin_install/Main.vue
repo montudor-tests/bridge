@@ -5,7 +5,7 @@
     >
         <v-card>
             <v-card-title>
-                <v-toolbar @dblclick.native="is_fullscreen = !is_fullscreen" height="30px">
+                <v-toolbar :style="`background: ${secondary_color}; color: ${text_color};`" @dblclick.native="is_fullscreen = !is_fullscreen" height="30px">
                     <span class="window-title">Extensions</span>
                     <v-spacer></v-spacer>
                     <v-btn small icon @click.stop="is_fullscreen = !is_fullscreen">
@@ -18,12 +18,23 @@
             </v-card-title>
             
 
-            <v-card-text :style="`max-height: ${window_height * 0.75}px; height: ${is_fullscreen ? window_height * 0.75 : 500}px; overflow-y: auto;`">
+            <v-card-text
+                :style="`
+                    max-height: ${window_height * 0.75}px;
+                    height: ${is_fullscreen ? window_height * 0.75 : 500}px;
+                    overflow-y: auto;
+                    background: ${tertiary_color}
+                `"
+            >
                 <plugin-list v-if="filter != 'web'" :plugins="plugins" :filter="filter" :is_fullscreen="is_fullscreen"></plugin-list>
                 <web-plugins v-else :is_fullscreen="is_fullscreen" :plugins="web_plugins" :installed_plugins="plugins"></web-plugins>
             </v-card-text>
 
-            <v-card-actions>
+            <v-card-actions
+                :style="`
+                    background: ${secondary_color}
+                `"
+            >
                 <v-bottom-nav
                     :active.sync="filter"
                     :value="true"
@@ -52,6 +63,7 @@
 <script>
 import PluginList from "./PluginList";
 import WebPlugins from "./WebPlugins";
+import { mapGetters } from 'vuex';
 
 export default {
     name: "plugin-install-main",
@@ -85,7 +97,8 @@ export default {
 
         plugins() {
             return this.$store.state.Plugins.installed_plugins;
-        }
+        },
+        ...mapGetters([ "secondary_color", "tertiary_color", "text_color" ])
     },
 
     created() {

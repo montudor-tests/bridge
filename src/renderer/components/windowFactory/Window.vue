@@ -48,7 +48,7 @@
                 height: ${is_fullscreen ? maxHeight : height}px;
                 padding-left: ${has_sidebar ? 0 : 8}px;
                 color: ${text_color};
-                background: ${primary_color};
+                background: ${tertiary_color};
             `">
                 <v-list
                     class="sidebar"
@@ -60,7 +60,7 @@
                         height: ${(is_fullscreen ? maxHeight : height) - 20}px;
                         overflow-y: auto;
                         overflow-x: hidden;
-                        background: ${primary_color};
+                        background: ${tertiary_color};
                     `"
                 >
                     <sidebar-element
@@ -188,7 +188,7 @@ export default {
         has_sidebar() {
             return this.win.sidebar != undefined;
         },
-        ...mapGetters([ "primary_color", "secondary_color", "text_color" ])
+        ...mapGetters([ "primary_color", "secondary_color", "tertiary_color", "text_color" ])
     },
     watch: {
         is_window_visible(new_val) {

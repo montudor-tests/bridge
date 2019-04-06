@@ -5,7 +5,7 @@
     >
         <v-card>
             <v-card-title>
-                <v-toolbar @dblclick.native="is_fullscreen = !is_fullscreen" height="30px">
+                <v-toolbar @dblclick.native="is_fullscreen = !is_fullscreen" height="30px" :style="`background: ${secondary_color}; color: ${text_color};`">
                     <span class="window-title">Documentation</span>
                     <v-spacer></v-spacer>
                     <v-btn small icon @click.stop="is_fullscreen = !is_fullscreen">
@@ -18,7 +18,14 @@
             </v-card-title>
             
 
-            <v-card-text :style="`max-height: ${window_height * 0.75}px; height: ${is_fullscreen ? window_height * 0.75 : 500}px; overflow-y: auto;`">
+            <v-card-text
+                :style="`
+                    max-height: ${window_height * 0.75}px;
+                    height: ${is_fullscreen ? window_height * 0.75 : 500}px;
+                    overflow-y: auto;
+                    background: ${tertiary_color};
+                `"
+            >
                <div ref="attach-documentation"></div>
             </v-card-text>
         </v-card>
@@ -27,6 +34,7 @@
 
 <script>
     import { DOC_LOADER, DOC_WINDOW } from "../../scripts/documentation/main";
+import { mapGetters } from 'vuex';
 
     export default {
         name: "documentation-main",
@@ -49,6 +57,9 @@
         },
         destroyed() {
             window.removeEventListener("resize", this.onResize);
+        },
+        computed: {
+            ...mapGetters([ "secondary_color", "tertiary_color", "text_color" ])
         },
         methods: {
             onResize() {

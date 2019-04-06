@@ -7,7 +7,7 @@ import store from './store';
 
 Vue.use(Vuetify, {
   options: {
-    customProperties: true
+    //customProperties: true
   }
 });
 Vue.use(VueCodeMirror);

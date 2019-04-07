@@ -73,6 +73,30 @@
                     "comment": "color: #0080FF;"
                 }
             }
+        },
+        {
+            "name": "Blue Theme",
+            "define": {
+                "theme": {
+                    "primary": "#283593",
+                    "secondary": "#1A237E",
+                    "tertiary": "#303F9F",
+                    "accent": "#1976D2",
+                    "text": "#ffffff"
+                },
+                "highlighter": {
+                    "property": "color: black;",
+                    "keyword": "color: #5A5CAD;",
+                    "definition": "text-decoration: underline;",
+                    "atom": "color: #6C8CD5;",
+                    "number": "color: #164;",
+                    "string": "color: red;",
+                    "variable": "color: black;",
+                    "variable_strong": "color: black;",
+                    "meta": "color: yellow;",
+                    "comment": "color: #0080FF;"
+                }
+            }
         }
     ]
 }

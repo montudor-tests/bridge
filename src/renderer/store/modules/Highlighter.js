@@ -1,4 +1,9 @@
 import Vue from "vue";
+import FileType from "../../scripts/editor/FileType";
+
+function getHighlighterDef() {
+    return FileType.getHighlighter().define;
+}
 
 const state = {
     keywords: [
@@ -52,14 +57,14 @@ const mutations = {
 }
 
 const getters = {
-    highlighter_keywords(state) {
-        return state.keywords.concat(state.plugin_keywords);
+    highlighter_keywords(state, getters) {
+        return () => getHighlighterDef().keywords.concat(state.plugin_keywords);
     },
-    highlighter_titles(state) {
-        return state.titles.concat(state.plugin_titles);
+    highlighter_titles(state, getters) {
+        return () => getHighlighterDef().titles.concat(state.plugin_titles);
     },
-    highlighter_symbols(state) {
-        return state.symbols.concat(state.plugin_symbols);
+    highlighter_symbols(state, getters) {
+        return () => getHighlighterDef().symbols.concat(state.plugin_symbols);
     }
 }
 

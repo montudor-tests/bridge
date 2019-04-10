@@ -31,6 +31,17 @@ export default class FileType {
     }
 
     static getHighlighter() {
-        return this.getData().highlighter;
+        try {
+            return this.getData().highlighter;
+        } catch(e) {
+            return {
+                define: {
+                    keywords: [],
+                    symbols: [],
+                    titles: []
+                }
+            }
+        }
+        
     }
 }

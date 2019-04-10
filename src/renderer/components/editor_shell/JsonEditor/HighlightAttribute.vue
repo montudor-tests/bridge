@@ -42,9 +42,7 @@
                 return this.$store.state.Settings.color_theme_variant || 0;
             },
             color_theme() {
-                console.log(this.color_theme_variant)
                 return ThemeManager.getHighlighter(this.color_theme_variant);
-                // return this.is_dark_mode ? this.$store.state.Appearance.color_theme.dark : this.$store.state.Appearance.color_theme.light;
             }
         }
     }

@@ -1,8 +1,0 @@
-{
-    "set": {},
-    "define": {
-        "keywords": [ "tiers", "trades", "groups" ],
-        "titles": [ "item", "quantity" ],
-        "symbols": [ "wants", "gives" ]
-    }
-}

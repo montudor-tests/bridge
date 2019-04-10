@@ -6,6 +6,7 @@
 
 <script>
     import ThemeManager from "../../../scripts/themes/Manager";
+    import FileType from '../../../scripts/editor/FileType';
 
     export default {
         name: "highlight-text",
@@ -18,14 +19,17 @@
             };
         },  
         computed: {
+            highlighter_def() {
+                return FileType.getHighlighter().define;
+            },
             keywords() {
-                return this.$store.getters.highlighter_keywords;
+                return this.highlighter_def.keywords;
             },
             titles() {
-                return this.$store.getters.highlighter_titles;
+                return this.highlighter_def.titles;
             },
             symbols() {
-                return this.$store.getters.highlighter_symbols;
+                return this.highlighter_def.symbols;
             },
             text() {
                 if(this.$slots.default) return (this.$slots.default[0].text + "").trim();
@@ -44,7 +48,6 @@
             },
             color_theme() {
                 return ThemeManager.getHighlighter(this.color_theme_variant);
-                // return this.is_dark_mode ? this.$store.state.Appearance.color_theme.dark : this.$store.state.Appearance.color_theme.light;
             }
         },
         methods: {

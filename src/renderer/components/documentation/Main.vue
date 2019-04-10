@@ -3,7 +3,7 @@
         v-model="DOC_WINDOW.is_open"
         :max-width="is_fullscreen ? 2000 : 500"
     >
-        <v-card>
+        <v-card class="mc-documentation">
             <v-card-title>
                 <v-toolbar @dblclick.native="is_fullscreen = !is_fullscreen" height="30px" :style="`background: ${secondary_color}; color: ${text_color};`">
                     <span class="window-title">Documentation</span>

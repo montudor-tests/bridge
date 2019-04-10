@@ -154,10 +154,10 @@
     padding-top: 0;
   }
 
-  a {
+  .mc-documentation a {
     color: unset !important;
   }
-  table {
+  .mc-documentation table {
     border-color: unset;
   }
 

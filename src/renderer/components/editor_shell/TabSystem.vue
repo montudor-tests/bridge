@@ -1,12 +1,19 @@
 <template>
     <v-layout :style="`overflow-x: ${is_mandatory ? 'scroll' : 'auto'}`" row wrap>
-            <v-tabs :slider-color="accent_color" v-model="selected_tab" :mandatory="is_mandatory" :show-arrows="false">
+            <v-tabs
+                :slider-color="accent_color"
+                :color="tertiary_color"
+                v-model="selected_tab"
+                :mandatory="is_mandatory"
+                :show-arrows="false"
+            >
                 <v-tab 
                     v-for="(file, i) in open_files"
                     :key="`${selected_project}-${i}-${unsaved.join()}`"
                     bottom
                     :ripple="selected_tab != i"
                     :class="`tab ${selected_tab == i ? 'selected' : ''}`"
+                    :style="`color: ${text_color} !important;`"
                     color="red"
                 >
                     <span :style="`font-style: ${unsaved[i] ? 'italic' : 'none'};`">{{ file.file_name }}</span>
@@ -61,7 +68,9 @@ export default {
             return this.open_files.length > 0;
         },
         ...mapGetters([
-            "accent_color"
+            "accent_color",
+            "tertiary_color",
+            "text_color"
         ])
     },
     methods: {

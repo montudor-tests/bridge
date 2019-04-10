@@ -6,34 +6,6 @@ function getHighlighterDef() {
 }
 
 const state = {
-    keywords: [
-        "minecraft",
-        "description",
-        "events",
-        "components",
-        "component_groups",
-        "timeline"
-    ],
-    titles: [
-        "event",
-        "format_version",
-
-        "on_entry",
-        "on_exit"
-    ],
-    symbols: [
-        "add",
-        "remove",
-        "sequence",
-        "randomize",
-
-        "states",
-        "scripts",
-        "animations",
-        "transitions",
-        "variables",
-        "animation_controllers"
-    ],
     plugin_keywords: [],
     plugin_titles: [],
     plugin_symbols: []

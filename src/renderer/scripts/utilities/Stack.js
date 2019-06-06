@@ -1,27 +1,21 @@
-let stack = new WeakMap();
-
 export default class Stack {
-    constructor(arr=[]) {
-        stack.set(this, arr);
+    constructor(arr = []) {
+        this.stack = arr;
     }
-
     push(...el) {
-        stack.get(this).unshift(...el);
+        this.stack.unshift(...el);
     }
     pop() {
-        return stack.get(this).shift();
+        return this.stack.shift();
     }
     peek() {
-        return stack.get(this)[0];
+        return this.stack[0];
     }
-    show() {
-        console.log(stack.get(this));
-    }
-
     isEmpty() {
         return this.size == 0;
     }
     get size() {
-        return stack.get(this).length;
+        return this.stack.length;
     }
 }
+//# sourceMappingURL=Stack.js.map

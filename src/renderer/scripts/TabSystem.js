@@ -157,6 +157,9 @@ class TabSystem {
         if(this.projects[this.project] === undefined) return [];
         return this.projects[this.project];
     }
+    setFiltered(f=[]) {
+        return this.projects[this.project] = f;
+    }
     navigationBack() {
         let nav = this.getCurrentNavigation().split("/");
         nav.pop();

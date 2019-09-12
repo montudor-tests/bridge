@@ -23,8 +23,8 @@ jobs:
       env:
         CI: true
     - name: Upload to release
-      uses: skx/github-action-publish-binaries@master
+      uses: softprops/action-gh-release@v1
+      with:
+        files: bridge*
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        args: 'build/bridge*'

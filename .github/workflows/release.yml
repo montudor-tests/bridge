@@ -1,0 +1,30 @@
+name: Build and deploy
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        platform: [windows-latest] # Add ubuntu-latest, macos-latest to list when supported
+    runs-on: ${{ matrix.platform }}
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12
+    - name: npm install and build
+      run: |
+        npm install
+        npm run build
+      env:
+        CI: true
+    - name: Upload to release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: dist/*.exe
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

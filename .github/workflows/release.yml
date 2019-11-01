@@ -8,7 +8,7 @@ jobs:
   build:
     strategy:
       matrix:
-        platform: [windows-latest] # Add ubuntu-latest, macos-latest to list when supported
+        platform: [windows-latest, ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.platform }}
     steps:
     - uses: actions/checkout@v1
@@ -23,6 +23,6 @@ jobs:
     - name: Upload to release
       uses: softprops/action-gh-release@v1
       with:
-        files: build/*.exe
+        files: build/*
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

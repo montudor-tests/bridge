@@ -23,6 +23,10 @@ jobs:
     - name: Upload to release
       uses: softprops/action-gh-release@v1
       with:
-        files: build/*
+        files: |
+          build/*.exe
+          build/*.snap
+          build/*.AppImage
+          build/*.dmg
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

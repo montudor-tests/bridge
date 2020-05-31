@@ -1,6 +1,6 @@
 {
   "name": "bridge",
-  "version": "1.7.2",
+  "version": "1.7.3",
   "author": "solvedDev <solveddev@gmail.com>",
   "description": "A powerful add-on editor",
   "license": "GNU",
@@ -29,7 +29,8 @@
     ],
     "publish": [{
       "provider": "github",
-      "owner": "montudor-tests"
+      "owner": "montudor-tests",
+      "releaseType": "release"
     }],
     "dmg": {
       "contents": [
@@ -62,6 +63,7 @@
       ]
     },
     "linux": {
+      "publish": ["github"],
       "icon": "build/icons"
     }
   },
